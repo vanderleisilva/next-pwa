@@ -1,7 +1,13 @@
 import Link from 'next/link';
+import { NextPage } from 'next';
 import fetch from 'isomorphic-unfetch';
 
-const Index = ({ shows }) => (
+interface IShow {
+  id: number;
+  name: string;
+}
+
+const Index: NextPage<{ shows: Array<IShow> }> = ({ shows }) => (
   <div>
     <h1>Batman TV Shows</h1>
     <ul>
@@ -18,7 +24,7 @@ const Index = ({ shows }) => (
 
 Index.getInitialProps = async () => {
   const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-  const data = await res.json();
+  const data: Array<{show: IShow}> = await res.json();
 
   console.log(`Show data fetched. Count: ${data.length}`);
 
