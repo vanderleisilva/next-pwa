@@ -3,9 +3,7 @@ import {
   Container,
   AppBar,
   Toolbar,
-  IconButton,
   Typography,
-  Button,
   CssBaseline,
   Drawer,
   List,
@@ -13,56 +11,70 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
-  Paper
+  Paper,
+  makeStyles,
+  Theme,
+  createStyles
 } from "@material-ui/core";
 
 import Link from "next/link";
 
-import MenuIcon from "@material-ui/icons/Menu";
-import MailIcon from "@material-ui/icons/Mail";
+import PagesIcon from "@material-ui/icons/Pages";
 import HomeIcon from "@material-ui/icons/Home";
 
 const pages = ["about", "list", "material-theme"];
 
-const Index: FunctionComponent = ({ children }) => (
-  <Container>
-    <Paper style={{ marginLeft: 8 * 25, marginTop: 8 * 11, padding: 8 * 3 }}>
-      <CssBaseline />
-      <AppBar position="fixed">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" children="News" />
-          <Button color="inherit" children="Login" />
-        </Toolbar>
-      </AppBar>
+const Index: FunctionComponent = ({ children }) => {
+  const classes = useStyles();
+  return (
+    <Container>
+      <Paper className={classes.paper}>
+        <CssBaseline />
+        <AppBar position="fixed">
+          <Toolbar className={classes.toolbar}>
+            <Typography variant="h6" children="Next PWA" />
+          </Toolbar>
+        </AppBar>
 
-      <Drawer variant="permanent">
-        <List>
-          <Link href="/">
-            <ListItem button component="a">
-              <ListItemIcon children={<HomeIcon />} />
-              <ListItemText primary="Home" />
-            </ListItem>
-          </Link>
-        </List>
-        <Divider />
-        <List>
-          {pages.map(text => (
-            <Link key={text} href={`/${text}`}>
-              <ListItem button>
-                <ListItemIcon children={<MailIcon />} />
-                <ListItemText primary={text} />
+        <Drawer variant="permanent">
+          <List>
+            <Link href="/">
+              <ListItem button component="a">
+                <ListItemIcon children={<HomeIcon />} />
+                <ListItemText primary="Home" />
               </ListItem>
             </Link>
-          ))}
-        </List>
-      </Drawer>
+          </List>
+          <Divider />
+          <List>
+            {pages.map(text => (
+              <Link key={text} href={`/${text}`}>
+                <ListItem button>
+                  <ListItemIcon children={<PagesIcon />} />
+                  <ListItemText primary={text} />
+                </ListItem>
+              </Link>
+            ))}
+          </List>
+        </Drawer>
 
-      {children}
-    </Paper>
-  </Container>
+        {children}
+      </Paper>
+    </Container>
+  );
+};
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    paper: {
+      marginLeft: theme.spacing(25),
+      marginTop: theme.spacing(11),
+      padding: theme.spacing(3)
+    },
+    toolbar: {
+      justifyContent: 'flex-end'
+    }
+  })
 );
 
 export default Index;
