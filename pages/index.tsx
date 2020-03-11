@@ -1,14 +1,8 @@
-import Container from '../components/container';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+import Container from "../components/container";
+import { Typography } from "@material-ui/core";
 
-export default () => {
-
-  return (
-    <Container>
-      <Fab color="primary" aria-label="add">
-        <AddIcon />
-      </Fab>
-    </Container>
-  );
-}
+export default () => (
+  <Container>
+    <Typography children="Home page" />
+  </Container>
+);

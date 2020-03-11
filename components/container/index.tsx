@@ -1,6 +1,4 @@
-import { FunctionComponent, useState, SetStateAction } from "react";
-import dynamic from 'next/dynamic'
-import { useTheme, Theme, ThemeProvider } from "@material-ui/core/styles";
+import { FunctionComponent } from "react";
 import {
   Container,
   AppBar,
@@ -17,75 +15,54 @@ import {
   Divider,
   Paper
 } from "@material-ui/core";
+
+import Link from "next/link";
+
 import MenuIcon from "@material-ui/icons/Menu";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import HomeIcon from "@material-ui/icons/Home";
 
-const ReactJson = dynamic(import('react-json-view'), { ssr: false })
+const pages = ["about", "list", "material-theme"];
 
-const Index: FunctionComponent = ({ children }) => {
-  const theme = useTheme();
-  const [custom, setCustom] = useState(theme);
+const Index: FunctionComponent = ({ children }) => (
+  <Container>
+    <Paper style={{ marginLeft: 8 * 25, marginTop: 8 * 11, padding: 8 * 3 }}>
+      <CssBaseline />
+      <AppBar position="fixed">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" children="News" />
+          <Button color="inherit" children="Login" />
+        </Toolbar>
+      </AppBar>
 
-  return (
-    <ThemeProvider theme={custom}>
-      <Container>
-        <Paper>
-          <CssBaseline />
-          <AppBar position="fixed">
-            <Toolbar>
-              <IconButton edge="start" color="inherit" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" children="News" />
-              <Button color="inherit" children="Login" />
-            </Toolbar>
-          </AppBar>
+      <Drawer variant="permanent">
+        <List>
+          <Link href="/">
+            <ListItem button component="a">
+              <ListItemIcon children={<HomeIcon />} />
+              <ListItemText primary="Home" />
+            </ListItem>
+          </Link>
+        </List>
+        <Divider />
+        <List>
+          {pages.map(text => (
+            <Link key={text} href={`/${text}`}>
+              <ListItem button>
+                <ListItemIcon children={<MailIcon />} />
+                <ListItemText primary={text} />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+      </Drawer>
 
-          <Drawer variant="permanent">
-            <List>
-              {["Inbox", "Starred", "Send email", "Drafts"].map(
-                (text, index) => (
-                  <ListItem button key={text}>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                )
-              )}
-            </List>
-            <Divider />
-            <List>
-              {["All mail", "Trash", "Spam"].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-          </Drawer>
-
-          <div style={{ marginLeft: "180px", marginTop: "90px" }}>
-            <ReactJson
-              displayDataTypes={false}
-              displayObjectSize={false}
-              enableClipboard={false}
-              collapsed={1}
-              src={theme}
-              onEdit={({ updated_src }) => {
-                setCustom(updated_src as SetStateAction<Theme>);
-              }}
-            />
-
-            {children}
-          </div>
-        </Paper>
-      </Container>
-    </ThemeProvider>
-  );
-};
+      {children}
+    </Paper>
+  </Container>
+);
 
 export default Index;

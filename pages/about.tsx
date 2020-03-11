@@ -1,12 +1,8 @@
-import Link from 'next/link';
+import Container from "../components/container";
+import { Typography } from "@material-ui/core";
 
-export default () => {
-  return (
-    <div>
-      <Link href="/">
-        <a>Go to index</a>
-      </Link>
-      <p>This is the about page</p>
-    </div>
-  );
-}
+export default () => (
+  <Container>
+    <Typography children="About page" />
+  </Container>
+);
