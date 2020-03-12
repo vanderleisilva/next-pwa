@@ -1,10 +1,19 @@
-const withPWA = require("next-pwa");
+const isProd = process.env.NODE_ENV === "production";
 
-module.exports =
-  process.env.NODE_ENV === "production"
-    ? withPWA({
-        pwa: {
-          dest: "public"
-        }
-      })
-    : {};
+const withPWA = !isProd
+  ? config => config
+  : require("next-pwa")({
+      pwa: {
+        dest: "public"
+      }
+    });
+
+const withMDX = require("@next/mdx")({
+  extension: /\.mdx?$/
+});
+
+module.exports = withPWA(
+  withMDX({
+    pageExtensions: ["js", "jsx", "md", "mdx"]
+  })
+);

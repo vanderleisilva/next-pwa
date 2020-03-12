@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { NextPage } from "next";
 import fetch from "isomorphic-unfetch";
 import Container from "../components/container";

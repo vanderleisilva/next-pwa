@@ -23,7 +23,7 @@ import IsOnline from '../isOnline';
 import PagesIcon from "@material-ui/icons/Pages";
 import HomeIcon from "@material-ui/icons/Home";
 
-const pages = ["about", "list", "material-theme"];
+const pages = ["about", "list", "material-theme", "my-mdx"];
 
 const Index: FunctionComponent = ({ children }) => {
   const classes = useStyles();
