@@ -18,6 +18,7 @@ import {
 } from "@material-ui/core";
 
 import Link from "next/link";
+import IsOnline from '../isOnline';
 
 import PagesIcon from "@material-ui/icons/Pages";
 import HomeIcon from "@material-ui/icons/Home";
@@ -59,6 +60,7 @@ const Index: FunctionComponent = ({ children }) => {
         </Drawer>
 
         {children}
+        <IsOnline />
       </Paper>
     </Container>
   );
