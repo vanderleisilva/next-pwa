@@ -1,0 +1,22 @@
+{
+  "short_name": "NextPWA",
+  "name": "NextJS PWA",
+  "description": "NextJS app with offline support",
+  "icons": [
+    {
+      "src": "/images/pwa-192.png",
+      "type": "image/png",
+      "sizes": "260x192"
+    },
+    {
+      "src": "/images/pwa-512.png",
+      "type": "image/png",
+      "sizes": "694x512"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#3f51b5"
+}

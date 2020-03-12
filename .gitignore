@@ -1,4 +1,5 @@
 node_modules/
 .next
-public
+public/sw.js
+public/workbox-*
 out
