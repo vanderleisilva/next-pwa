@@ -4,14 +4,19 @@
   "description": "NextJS app with offline support",
   "icons": [
     {
+      "src": "/images/pwa-144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
       "src": "/images/pwa-192.png",
       "type": "image/png",
-      "sizes": "260x192"
+      "sizes": "192x192"
     },
     {
       "src": "/images/pwa-512.png",
       "type": "image/png",
-      "sizes": "694x512"
+      "sizes": "512x512"
     }
   ],
   "start_url": "/?source=pwa",
