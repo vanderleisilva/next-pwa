@@ -1,31 +1,38 @@
-import Link from 'next/link';
-import { NextPage } from 'next';
-import fetch from 'isomorphic-unfetch';
-import Container from '../components/container'
+import Link from "next/link";
+import { NextPage } from "next";
+import fetch from "isomorphic-unfetch";
+import Container from "../components/container";
+import {
+  Typography,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText
+} from "@material-ui/core";
+import CheckIcon from "@material-ui/icons/Check";
 
-interface IShow {
+interface Show {
   id: number;
   name: string;
 }
 
-const Index: NextPage<{ shows: Array<IShow> }> = ({ shows }) => (
+const Index: NextPage<{ shows: Array<Show> }> = ({ shows }) => (
   <Container>
-    <h1>Batman TV Shows</h1>
-    <ul>
+    <Typography children="Batman TV Shows" />
+    <List>
       {shows.map(show => (
-        <li key={show.id}>
-          <Link href="/p/[id]" as={`/p/${show.id}`}>
-            <a>{show.name}</a>
-          </Link>
-        </li>
+        <ListItem key={show.id} button>
+          <ListItemIcon children={<CheckIcon />} />
+          <ListItemText primary={show.name} />
+        </ListItem>
       ))}
-    </ul>
+    </List>
   </Container>
 );
 
 Index.getInitialProps = async () => {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-  const data: Array<{show: IShow}> = await res.json();
+  const res = await fetch("https://api.tvmaze.com/search/shows?q=batman");
+  const data: Array<{ show: Show }> = await res.json();
 
   return {
     shows: data.map(entry => entry.show)
