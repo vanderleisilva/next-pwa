@@ -10,7 +10,7 @@ const MaterialTheme = () => {
 
   return (
     <Container>
-      <Typography children="Material Theme" />
+      <Typography children="Material Theme" variant="h6" />
       <ReactJson
         displayDataTypes={false}
         displayObjectSize={false}
