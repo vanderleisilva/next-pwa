@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import {
   Container,
   AppBar,
@@ -14,67 +14,120 @@ import {
   Paper,
   makeStyles,
   Theme,
-  createStyles
+  Hidden,
+  createStyles,
+  IconButton
 } from "@material-ui/core";
 
 import Link from "next/link";
-import IsOnline from '../isOnline';
+import IsOnline from "../isOnline";
 
 import PagesIcon from "@material-ui/icons/Pages";
 import HomeIcon from "@material-ui/icons/Home";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const pages = ["about", "list", "material-theme", "my-mdx"];
+const drawerWidth = 8 * 29;
 
 const Index: FunctionComponent = ({ children }) => {
   const classes = useStyles();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const content = (
+    <>
+      <List>
+        <Link href="/">
+          <ListItem button component="a">
+            <ListItemIcon children={<HomeIcon />} />
+            <ListItemText primary="Home" />
+          </ListItem>
+        </Link>
+      </List>
+      <Divider />
+      <List>
+        {pages.map(text => (
+          <Link key={text} href={`/${text}`}>
+            <ListItem button>
+              <ListItemIcon children={<PagesIcon />} />
+              <ListItemText primary={text} />
+            </ListItem>
+          </Link>
+        ))}
+      </List>
+    </>
+  );
+
   return (
-    <Container>
+    <div className={classes.container}>
+      <CssBaseline />
+      <AppBar position="fixed">
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            className={classes.icon}
+            onClick={() => setMobileOpen(!mobileOpen)}
+            children={<MenuIcon />}
+          />
+          <Typography variant="h6" children="Next PWA" />
+        </Toolbar>
+      </AppBar>
+
+      <nav className={classes.nav}>
+        <Hidden smUp>
+          <Drawer
+            variant="temporary"
+            anchor="left"
+            open={mobileOpen}
+            onClose={() => setMobileOpen(!mobileOpen)}
+            children={content}
+            classes={{paper: classes.drawer}}
+            ModalProps={{
+              keepMounted: true
+            }}
+          />
+        </Hidden>
+
+        <Hidden xsDown>
+          <Drawer
+            open
+            variant="permanent"
+            classes={{paper: classes.drawer}}
+            children={content}
+          />
+        </Hidden>
+      </nav>
+
       <Paper className={classes.paper}>
-        <CssBaseline />
-        <AppBar position="fixed">
-          <Toolbar className={classes.toolbar}>
-            <Typography variant="h6" children="Next PWA" />
-          </Toolbar>
-        </AppBar>
-
-        <Drawer variant="permanent">
-          <List>
-            <Link href="/">
-              <ListItem button component="a">
-                <ListItemIcon children={<HomeIcon />} />
-                <ListItemText primary="Home" />
-              </ListItem>
-            </Link>
-          </List>
-          <Divider />
-          <List>
-            {pages.map(text => (
-              <Link key={text} href={`/${text}`}>
-                <ListItem button>
-                  <ListItemIcon children={<PagesIcon />} />
-                  <ListItemText primary={text} />
-                </ListItem>
-              </Link>
-            ))}
-          </List>
-        </Drawer>
-
         {children}
         <IsOnline />
       </Paper>
-    </Container>
+    </div>
   );
 };
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    paper: {
-      marginLeft: theme.spacing(25),
-      marginTop: theme.spacing(11),
-      padding: theme.spacing(3)
+    container: {
+      display: "flex",
+      marginTop: theme.spacing(8)
     },
     toolbar: {
-      justifyContent: 'flex-end'
+      justifyContent: "space-between"
+    },
+    drawer: {
+      width: drawerWidth
+    },
+    paper: {
+      flexGrow: 1,
+      padding: theme.spacing(2),
+      margin: theme.spacing(3)
+    },
+    nav: {
+      [theme.breakpoints.up("sm")]: {
+        width: drawerWidth
+      }
+    },
+    icon: {
+      color: theme.palette.common.white
     }
   })
 );
