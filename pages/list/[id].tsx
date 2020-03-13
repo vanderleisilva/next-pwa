@@ -1,4 +1,4 @@
-import Container from "../../components/container";
+import { Container } from "../../components/Container";
 import fetch from "isomorphic-unfetch";
 import { NextPageContext } from "next";
 import { Typography } from "@material-ui/core";

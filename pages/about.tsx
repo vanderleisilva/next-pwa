@@ -1,4 +1,4 @@
-import Container from "../components/container";
+import { Container } from "../components/Container";
 import { Typography } from "@material-ui/core";
 
 export default () => (

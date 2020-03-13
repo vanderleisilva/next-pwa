@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import fetch from "isomorphic-unfetch";
-import Container from "../components/container";
+import { Container } from "../components/Container";
 import {
   Typography,
   List,
@@ -9,7 +9,7 @@ import {
   ListItemText
 } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
-import Link from 'next/link';
+import Link from "next/link";
 
 interface Show {
   id: number;
@@ -23,9 +23,9 @@ const Index: NextPage<{ shows: Array<Show> }> = ({ shows }) => (
       {shows.map(show => (
         <Link key={show.id} href="/list/[id]" as={`/list/${show.id}`}>
           <ListItem button>
-          <ListItemIcon children={<CheckIcon />} />
-          <ListItemText primary={show.name} />
-        </ListItem>
+            <ListItemIcon children={<CheckIcon />} />
+            <ListItemText primary={show.name} />
+          </ListItem>
         </Link>
       ))}
     </List>

@@ -1,6 +1,5 @@
 import { FunctionComponent, useState } from "react";
 import {
-  Container,
   AppBar,
   Toolbar,
   Typography,
@@ -20,7 +19,8 @@ import {
 } from "@material-ui/core";
 
 import Link from "next/link";
-import IsOnline from "../isOnline";
+import { IsOnline } from "./IsOnline";
+import { MdxTagParse } from "./MdxTagParse";
 
 import PagesIcon from "@material-ui/icons/Pages";
 import HomeIcon from "@material-ui/icons/Home";
@@ -29,7 +29,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 const pages = ["about", "list", "material-theme", "my-mdx"];
 const drawerWidth = 8 * 29;
 
-const Index: FunctionComponent = ({ children }) => {
+export const Container: FunctionComponent = ({ children }) => {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -79,7 +79,7 @@ const Index: FunctionComponent = ({ children }) => {
             open={mobileOpen}
             onClose={() => setMobileOpen(!mobileOpen)}
             children={content}
-            classes={{paper: classes.drawer}}
+            classes={{ paper: classes.drawer }}
             ModalProps={{
               keepMounted: true
             }}
@@ -90,14 +90,14 @@ const Index: FunctionComponent = ({ children }) => {
           <Drawer
             open
             variant="permanent"
-            classes={{paper: classes.drawer}}
+            classes={{ paper: classes.drawer }}
             children={content}
           />
         </Hidden>
       </nav>
 
       <Paper className={classes.paper}>
-        {children}
+        <MdxTagParse children={children} />
         <IsOnline />
       </Paper>
     </div>
@@ -131,5 +131,3 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-
-export default Index;

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Snackbar } from "@material-ui/core";
 
-export default () => {
+export const IsOnline = () => {
   const [connected, setConnected] = useState(true);
 
   useEffect(() => {
-    setInterval(() => setConnected(window.navigator.onLine), 500)
+    setInterval(() => setConnected(window.navigator.onLine), 500);
   }, []);
 
   return (

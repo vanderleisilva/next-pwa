@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
-import Container from "../components/container";
-import { useTheme} from "@material-ui/core/styles";
+import { Container } from "../components/Container";
+import { useTheme } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 
 const ReactJson = dynamic(import("react-json-view"), { ssr: false });
