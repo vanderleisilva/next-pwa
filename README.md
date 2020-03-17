@@ -16,3 +16,5 @@ If you using chrome browser (note that is a technology still under [development]
 - React
 - Typescript
 
+### Further information
+Do you want to know more about the project's idea and goals? Have a look on [this article](https://dev.to/vanderleisilva/nextjs-progressive-web-app-4mkk) ;)
